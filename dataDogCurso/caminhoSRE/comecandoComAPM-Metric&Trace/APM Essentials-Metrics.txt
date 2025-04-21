@@ -1,0 +1,48 @@
+APM metrics reveal trends and patterns
+The data collected through APM reveals typical usage patterns, highlights anomalies, and provides insights into service health and performance. Trace metrics in APM capture request counts, error counts, and latency measurements for 100% of application requests, not just a sample. With this visibility, you can build an understanding of normal usage, spot issues that may impact user experience, plan for future growth, and keep things running smoothly.
+
+When you’re assessing the performance of your application, you may want to know the answers to questions like these:
+
+How many requests are being made to a specific service? Request volume metrics show which services are handling the most traffic, helping to identify areas that may require scaling or load-balancing to keep up with demand.
+
+What is the average latency of requests to a particular endpoint? By tracking the duration of requests, you can identify services that may be slowing the system down and could benefit from optimization.
+
+What is the error rate for a specific service? Monitoring error rates helps you identify issues that are impacting user experience, such as failing requests or timeouts.
+
+How does traffic change over time or during special events? By comparing request rates over time, you can spot traffic patterns like daily peaks or spikes during sales, and observe how your system responds to changes in demand. This information can help you plan for future events and ensure your system can handle the load.
+
+RED metrics: Rate, Errors, Duration
+In distributed systems, the volume of incoming application data can make it challenging to answer questions about overall performance. To simplify this, key metrics are grouped into categories that focus on the most critical aspects of service behavior.
+
+Focusing on RED (Rate, Errors, Duration) metrics is a practical approach to evaluating service performance. Each metric captures a different dimension of application data that translates into meaningful insights. Monitoring RED metrics across services gives you a clear view of system behavior.
+
+Rate (throughput)
+The number of requests a service processes per second.
+
+High throughput means the service is handling a lot of requests, which could strain its capacity and cause it to slow down. A low rate may mean that the service isn’t being used as expected or that traffic patterns have shifted. Rate metrics help you track how much traffic a service is receiving and determine if your system is sized correctly to handle it.
+
+Errors
+The number of requests that fail.
+
+This metric shows how often something goes wrong when the service processes requests. A high error rate can highlight issues that need attention, such as dependency problems, misconfigurations, or bugs.
+
+Duration (latency)
+The time it takes for a service to process a request.
+
+This metric shows how quickly a service responds. High duration means the service is slow, which could be caused by resource bottlenecks, inefficient code, or delays in dependencies. Low latency is ideal, because faster response times lead to better user experiences.
+
+Analyze RED metrics together for the big picture
+The three RED metrics are closely connected, and changes in one metric often affect the others. For example, if the volume (rate) of requests increases, latency (duration) might also rise as the system struggles to keep up with demand. A higher error rate might follow a spike in latency if requests start timing out or dependencies fail. Considering these metrics together helps you see how changes in one area impact the system as a whole, making it easier to identify areas that need attention or optimization.
+
+Datadog APM provides built-in summary graphs for each service, visualizing key metrics that help you monitor service health and performance.
+
+Four graphs for a service showing requests and errors, latency, error count, and percentage of time spent by downstream services.
+Four graphs for a service showing requests and errors, latency, error count, and percentage of time spent by downstream services.
+
+These graphs focus on the RED metrics that are essential for understanding overall service behavior:
+
+Requests and Errors: Tracks the total number of requests and how many of those requests resulted in errors over time.
+Latency: Displays response times as percentiles over time.
+Errors: Shows the total number of errors over time.
+% of Time Spent by Downstream Service: Highlights how much of the total request time is spent in downstream services.
+These summary graphs give you a quick snapshot of what’s going on with your services and serve as a starting point for deeper analysis when needed.

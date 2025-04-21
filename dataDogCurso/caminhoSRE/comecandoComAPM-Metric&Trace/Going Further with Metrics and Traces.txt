@@ -1,0 +1,100 @@
+With a baseline in place, you are ready to dive deeper into application analysis using metrics and traces. In this lesson, you’ll learn about APM tools that will allow you to further understand your application’s performance.
+
+Going further with traces: span tags and attributes
+Datadog automatically collects trace metadata and appends it to spans as span tags and span attributes. These key-value pairs provide detailed information about a span that can be used to filter, search, and analyze traces.
+
+Span tags
+Span tags add context about the environment or infrastructure supporting the span. These tags include details such as the container, host, or Kubernetes deployment associated with the operation.
+
+Span tags for a rack.request span include Container tags like container_id, Kubernetes tags like kube_deployment, Datadog tags like env and service, and custom tags like app and chart_name.
+Span tags for a rack.request span include Container tags like container_id, Kubernetes tags like kube_deployment, Datadog tags like env and service, and custom tags like app and chart_name.
+
+Span tags help you correlate application behavior with the underlying infrastructure, making it easier to determine if performance issues stem from the application or its environment.
+
+Span attributes
+Span attributes define the specific content of a span, such as the request URL (http.url), a customer identifier (customer.id), or details about an error (error.message).
+
+Span overview showing span attributes like customer.email, customer.id, error.file, error.fingerprint, and error.message.
+Span overview showing span attributes like customer.email, customer.id, error.file, error.fingerprint, and error.message.
+
+Span attributes offer more granular details about the operation represented by the span, allowing you to drill down into the specifics of a request.
+
+Search and filter traces with span tags and attributes
+Trace Explorer shows you a live-updating list view of traces for all services. Because of the volume of data, it’s helpful to filter the list to focus on traces from specific services, operations, or endpoints.
+
+Trace Explorer showing list of traces from all Storedog services, filtered to env:apm-getting-started.
+Trace Explorer showing list of traces from all Storedog services, filtered to env:apm-getting-started.
+
+Use the @ symbol in the search bar to query span attributes (for example, @http.url).
+Reserved attributes such as env, service, operation_name, and trace_id are present on all spans and can be queried directly without the @ symbol.
+Convert any span tags or attributes into a facet to filter and group traces. For example, you could group traces by env to compare performance between staging and production environments, or filter traces by http.status_code to focus on failed requests or errors.
+Going further with metrics: additional visualizations
+The Service page in Datadog APM provides built-in visualizations, including the RED metrics you’ve already explored. These graphs offer additional out-of-the-box options to analyze your data from different perspectives.
+
+Graph options for requests and errors metrics
+The Requests and Errors graph shows the total number of hits and errors in a timeseries. You can switch to alternate metrics and that include the following:
+
+Requests by version
+Requests per second by version
+Requests and errors per second
+Menu showing other visualization options for the requests and errors graph.
+Menu showing other visualization options for the requests and errors graph.
+
+Example use case: After deploying a new version of a service, you notice a drop in requests. By switching to the Requests by version view, you compare traffic between the new and old versions to see if the drop correlates with the new version.
+
+Graph options for error metrics
+The Errors graph groups error counts by status code in a timeseries, helping you analyze failure patterns. Alternate views let you focus on other aspects of error data:
+
+Errors by version
+Errors per second
+Errors per second by version
+Percentage error rate by version
+Percentage Error rate
+Menu showing other visualization options for the errors graph.
+Menu showing other visualization options for the errors graph.
+
+Example use case: You notice a spike in 500 errors in the Errors graph. Switching to the Errors per second view shows how quickly errors are occurring in time. A steady increase in errors per second could indicate a problem like a database running out of connections or a slow down in an external service. A sudden burst of errors, on the other hand, could point to a deployment issue. You could use the Errors per second by version view to check if the problem is limited to a specific version.
+
+Graph options for latency metrics
+The Latency graph shows response times as percentiles (for example, p50, p90) in a timeseries, making it easy to see trends and outliers. You can switch to other visualizations to explore latency data in more detail:
+
+Latency by version
+Historical latency
+Latency by error
+Latency distribution
+Apdex (Application Performance Index)
+Menu showing other visualization options for the latency graph.
+Menu showing other visualization options for the latency graph.
+
+Example use case: Users are reporting slow response times. You can switch to the Latency by error view to figure out if delays are affecting only failing requests or if they are impacting all traffic. To assess how these delays are affecting user experience, you could switch to the Apdex graph. The Apdex score is a standardized measure from 0-1 that reflects user satisfaction with response times. A score of 1 means all requests are satisfactory, while a score of 0 means no requests are satisfactory. This graph provides meaningful context for interpreting other latency metrics, helping you understand how frustrated your end users really are with the slow response times.
+
+Graph options for sublayer metrics
+Sublayer metrics like the Average Time per Request are shown only when a service has downstream dependencies (that is, when they call other services). These metrics complement the information you’ve seen in flame graphs. You can choose from the following options:
+
+Total time spent per service
+Percentage of total time spent per service
+Average time per request
+Menu showing other visualization options for the avg time per request graph.
+Menu showing other visualization options for the avg time per request graph.
+`
+Example use case: You notice that the store-frontend service is experiencing high latency. By switching to the Total time spent per service view, you can identify which downstream services are causing the biggest delay.
+
+Going further with custom metrics
+If the built-in options don’t fully meet your needs, you can create custom metrics to measure what’s most relevant to your application. For example, you could track the percentage of successful checkouts compared to total checkout requests, or monitor cache hit and miss rates to evaluate caching efficiency.
+
+Both built-in and custom metrics can be added to dashboards for ongoing monitoring, giving you a quick pulse on service health or a starting point for deeper investigations.
+
+With the big picture provided by metrics and the granular insights you get from traces, you’ve got solid tools to understand the performance of your application in a distributed system when things are running smoothly and when you’re not sure what’s going on.
+
+Observing how a distributed system responds to change
+Metrics and traces not only help you understand how your application behaves under normal conditions, but also show how it responds to changes in traffic, configuration, or code.
+
+Here are some common ways to use metrics and traces to monitor overall application performance:
+
+Observe traffic trends: Track how request volumes fluctuate over time and across services to identify patterns, surges, or unexpected drops.
+Identify latency spikes: Spot slowdowns at specific times or in specific services, especially under increased traffic, and determine which requests and services are most affected.
+Track error rates: Detect patterns of failures in services and identify the specific requests, endpoints, or dependencies causing errors.
+Analyze live metrics: Use real-time data to observe how your system handles performance challenges as they happen.
+For example, during a planned traffic surge, such as a promotion or seasonal event, metrics allow you to track rising request rates, latency, and any spikes in errors. Traces provide the details you need to identify which operations are slow or failing and determine how specific services or dependencies are contributing to errors or delays.
+
+In the next lab activity, you’ll observe a simulated surge in traffic to Storedog to observe how metrics and traces reflect the changes in application performance.

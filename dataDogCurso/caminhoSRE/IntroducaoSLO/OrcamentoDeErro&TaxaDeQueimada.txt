@@ -1,0 +1,102 @@
+Orçamentos de erro e taxas de queima
+Erros acontecem — isso é fato. Nenhum sistema, por mais bem projetado que seja, consegue manter 100% de disponibilidade para sempre, e tudo bem! Aceitar essa realidade nos permite monitorar os erros quando eles ocorrem e criar um plano para corrigi-los. É aí que entram os orçamentos de erro e as taxas de queima.
+
+Disponibilidade
+Ao criar seu SLO, é importante considerar o que o acordo de nível de serviço (SLA) realmente significa em termos de tempo de inatividade do serviço. Abaixo, um gráfico mostra como diferentes níveis de disponibilidade se relacionam com o tempo de inatividade do seu serviço. Este gráfico pode ser útil para manter em mente ao discutir os SLAs propostos com sua equipe.
+
+Esta tabela mostra a quantidade de tempo de inatividade aceitável com base no número de “noves” na sua meta de nível de serviço (por exemplo, 99,9%, 99,99%).
+Esta tabela mostra a quantidade de tempo de inatividade aceitável com base no número de “noves” na sua meta de nível de serviço (por exemplo, 99,9%, 99,99%).
+
+Orçamentos de erro
+Ao projetar um SLO, uma das partes mais importantes é definir o SLA. Digamos que você esteja de volta ao trabalho como SRE para uma startup de IA. Você pode definir um SLA de 99,9% para o seu serviço de atendimento ao cliente. O cálculo para um orçamento de erro é 1 menos o SLA do serviço.
+
+1 - 99,9% = 0,1% de erro de orçamento
+
+Se você estivesse criando um SLO que rastreasse um determinado período de tempo ou número de solicitações com uma taxa de sucesso de 99%, ficaria assim:
+
+Orçamento de erro = 1 - meta = 1 - 0,99 = 0,01 ou 1%
+
+Há cálculos adicionais que você pode fazer com base em como você mede o sucesso em relação ao seu SLA, mas a ideia básica é simples: a perfeição menos sua meta fornece o orçamento de erro.
+
+Então, por que é importante estabelecer seu orçamento de erro? Simplesmente calculá-lo não ajudará na estabilidade do seu ambiente. O verdadeiro motivo para calculá-lo é para que você possa monitorá-lo com eficácia.
+
+Alertas de orçamento de erro
+Ao criar um SLO, você tem duas opções: criar o SLO e passar para a próxima tarefa ou configurar um alerta de orçamento de erro como parte do processo. Se prestar atenção ao seu orçamento de erro é importante, quando faria sentido pular esse monitor extra?
+
+Se você estiver criando um novo SLO e não tiver certeza sobre o SLA definido, pode fazer sentido pular a configuração de um alerta de orçamento de erro — especialmente se você planeja monitorar tudo por conta própria. Talvez você precise discutir a eficácia do SLO com sua equipe ou não esteja pronto para ser alertado caso o limite de orçamento de erro seja ultrapassado. Nesses casos, pular o alerta pode fazer sentido. No entanto, para a maioria dos SLOs, configurar esse alerta é uma etapa importante.
+
+A criação de um monitor para o seu orçamento de erros é semelhante à configuração de qualquer outro monitor padrão no Datadog. Você definirá seus limites de alerta e aviso, dará um nome ao monitor e decidirá para onde as notificações devem ir.
+
+Captura de tela do processo de criação de orçamento de erro no Datadog
+Captura de tela do processo de criação de orçamento de erro no Datadog
+
+Por exemplo, vamos criar um alerta para o serviço frontend do gerador de imagens de IA. Nesse caso, seremos notificados quando atingirmos 50% do nosso orçamento de erro em um período de 7 dias e atualizaremos esse aviso para um alerta quando atingirmos 75%. O objetivo é identificar possíveis problemas antecipadamente, antes que se tornem maiores. Se você esperar até exceder o limite do seu SLO, pode ser tarde demais e já estar afetando seus usuários finais.
+
+Taxa de queima
+Imagine que você acabou de configurar seu primeiro alarme de erro de orçamento para o serviço de geração de imagens de IA. Você criou um limite de alerta para avisar quando 50% do seu orçamento de erro foi utilizado. 5 minutos após criar o alarme, você percebe que já utilizou 49% do seu orçamento. Mesmo sem ter recebido um alarme, você gostaria de saber a rapidez com que esse orçamento está sendo consumido?
+
+É aqui que outro conceito de SLO, conhecido como taxa de queima, pode ajudar. Uma taxa de queima monitora a velocidade com que, em relação ao SLO, o serviço está consumindo o orçamento de erro. O cálculo para uma taxa de queima é assim:
+
+Fórmula para calcular a taxa de queima
+Fórmula para calcular a taxa de queima
+
+A taxa de queima é a razão entre a sua taxa de erro e o seu orçamento de erro. Para esse serviço de gerador de imagens de IA, digamos que nosso orçamento de erro seja de 10.000 erros e que tivemos 100 erros no primeiro dia.
+
+Com um orçamento de erro de 10.000 erros, a 100 erros por dia a taxa de queima é de 1
+Com um orçamento de erro de 10.000 erros, a 100 erros por dia a taxa de queima é de 1
+
+Isso nos dá uma taxa de queima de 1. Qualquer número acima de 1 significa que a taxa de erro excederá o orçamento. Abaixo, um exemplo de como seria um SLO de 30 dias com três taxas de queima diferentes:
+
+Exemplo de consumo de orçamento de erro com taxa de queima de 1, 2 e 10
+Exemplo de consumo de orçamento de erro com taxa de queima de 1, 2 e 10
+
+Observe que, a uma taxa de queima de 1, o orçamento de erro é totalmente esgotado na janela de SLO alocada. Nesse ritmo, você está no caminho certo para cumprir seu SLA. A 2 ou 10, esse orçamento se esgota em um ritmo muito mais rápido e não é sustentável se continuar assim. O SLA seria quebrado, e isso significa que você precisa intervir e resolver o problema.
+
+Agora que você identificou a taxa de queima, o que vem a seguir? Você não pode monitorar seu SLO constantemente para ver se está queimando seu orçamento de erro. É aí que o Datadog ajuda, permitindo que você crie um alarme de taxa de queima para monitorá-lo.
+
+Alertas de taxa de queima
+Como você monitorará sua taxa de queima para se manter em 1 ou abaixo durante todo o seu SLO? Se quiser ficar de olho nesse número, você precisará configurar alertas de taxa de queima. Esses alertas o notificarão se sua taxa de queima começar a aumentar.
+
+Criar um alerta de taxa de queima é um pouco mais complicado do que criar um alerta comum no Datadog. Ao configurar o alerta, você precisará definir uma janela de alerta longa e uma curta para monitorar sua taxa de queima.
+
+Janelas longas e curtas
+A longa janela de alerta é definida em horas e garante que o alerta monitore a taxa de consumo por tempo suficiente para detectar problemas reais. Isso ajuda a evitar alertas desnecessários para pequenas flutuações temporárias na taxa de consumo.
+
+A janela curta de alerta é definida em minutos. Ela permite que o sistema se recupere de problemas menores antes que eles se transformem em problemas maiores. Ao criar o alerta pela primeira vez, é recomendável definir a janela curta como metade da duração da janela longa. Você pode ajustar isso posteriormente, de acordo com as necessidades da sua equipe e da sua empresa.
+
+A fórmula completa para calcular a taxa de queima é:
+
+Fórmula para calcular alerta de taxa de queima
+Fórmula para calcular alerta de taxa de queima
+
+Olhar para essa fórmula pode parecer complicado, então vamos analisá-la com um exemplo simples.
+
+Como SRE da startup de IA mais popular do mundo, você é responsável por monitorar a taxa de consumo do SLO, que monitora a taxa de erros do serviço front-end. Ao configurar um novo alerta, você tem duas opções.
+
+A primeira opção é calcular quanto tempo levaria para esgotar o orçamento de erro usando esta fórmula:
+
+Fórmula para calcular o tempo até que o orçamento de erro seja consumido
+Fórmula para calcular o tempo até que o orçamento de erro seja consumido
+
+Você começaria calculando quanto tempo levaria para usar o orçamento de erro e, em seguida, discutiria com sua equipe qual deveria ser a janela de alerta. Essa janela deve ser longa o suficiente para detectar problemas sérios na sua arquitetura.
+
+Para a janela curta, comece com metade do comprimento da janela longa e ajuste-a conforme monitora o desempenho do alerta.
+
+A segunda opção é considerar a taxa de queima e a janela longa em termos de quanto do orçamento de erro está sendo consumido:
+
+Fórmula para calcular taxa de queima e janela longa em termos de velocidade de consumo
+Fórmula para calcular taxa de queima e janela longa em termos de velocidade de consumo
+
+Por exemplo, se o serviço de front-end do seu gerador de imagens de IA for rastreado por um SLO de 7 dias e você espera que 10% do orçamento de erro seja usado em 1 hora para a janela longa, a fórmula ficaria assim:
+
+Exemplo de cálculo mostrando uma taxa de queima de 16,8 para uma janela de 7 dias
+Exemplo de cálculo mostrando uma taxa de queima de 16,8 para uma janela de 7 dias
+
+Abaixo estão os valores recomendados pelo Datadog para uma janela de 7 dias:
+
+Taxas de queima recomendadas pela Datadog para uma janela SLO de 7 dias
+Taxas de queima recomendadas pela Datadog para uma janela SLO de 7 dias
+
+Embora essas fórmulas possam parecer confusas no início, é importante revisá-las cuidadosamente para garantir que você esteja definindo as janelas de tempo longo e curto corretas para seus alertas de taxa de queima. Se não forem definidas corretamente, você poderá ter problemas com seus serviços de geração de imagens de IA — ou quaisquer outros serviços que você monitorar no futuro.
+
+Se quiser mais informações sobre esses cálculos, consulte a documentação oficial do Datadog sobre alertas de taxa de queima .

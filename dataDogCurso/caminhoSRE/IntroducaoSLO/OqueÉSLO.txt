@@ -1,0 +1,47 @@
+O que é um Objetivo de Nível de Serviço (SLO)?
+O material a seguir apresenta uma breve recapitulação do curso "Compreendendo os Objetivos de Nível de Serviço (SLOs)". Se você já conhece este conteúdo, sinta-se à vontade para pular para a próxima lição.
+
+Objetivo de Nível de Serviço (SLO)
+Um Objetivo de Nível de Serviço (SLO) é uma meta de desempenho mensurável e quantificável que define as metas operacionais aceitáveis ​​para um serviço. Ele define limites específicos para métricas-chave, como tempo de atividade, latência ou taxas de erro. Isso garante que o serviço atenda aos requisitos de negócios e às expectativas do usuário. Ao definir essas metas, as empresas criam uma maneira de monitorar a integridade de seus serviços ao longo do tempo.
+
+Definir SLOs envolve colaboração entre equipes, como gerentes de produto, engenheiros de confiabilidade do site (SREs) e partes interessadas, para garantir que todos concordem com o que está sendo rastreado.
+
+Um SLO configurado no Datadog exibe o status e as métricas associadas a ele.
+Um SLO configurado no Datadog exibe o status e as métricas associadas a ele.
+
+SLOs baseados em métricas
+SLOs baseados em métricas concentram-se em monitorar uma única métrica de desempenho, como tempo de atividade, tempo de resposta ou taxas de erro. Esses SLOs são construídos escolhendo um Indicador de Nível de Serviço (SLI) que mede os principais aspectos do desempenho ou da confiabilidade de um serviço. SLOs baseados em métricas são ideais para um monitoramento direto do desempenho. Alguns exemplos incluem:
+
+Tempo de atividade: garantir que um serviço esteja disponível uma certa porcentagem do tempo
+Latência: Monitoramento da velocidade das respostas da API ou tempos de carregamento da página
+Taxa de erro: rastreando a porcentagem de solicitações com falha
+Um SLO deve definir metas realistas e alcançáveis. Definir uma meta impossível de atingir, como 100% de disponibilidade, leva a equipe ao fracasso. Em vez disso, concentre-se em níveis de desempenho realistas e não aspiracionais.
+
+Captura de tela de um SLO baseado em métricas no Datadog
+Captura de tela de um SLO baseado em métricas no Datadog
+
+Esse tipo de SLO é simples de criar e fornece insights claros sobre a saúde do serviço. Ele ajuda as equipes a se concentrarem em métricas específicas que impactam diretamente a experiência do usuário, garantindo que o serviço permaneça online e atinja suas metas de desempenho.
+
+SLOs baseados em monitor
+SLOs baseados em monitoramento monitoram o desempenho e a confiabilidade usando monitores Datadog. Monitores permitem níveis mais altos de complexidade no que está sendo rastreado na aplicação. Suponha que a aplicação que precisa ser rastreada esteja implantada em várias regiões ao redor do mundo. Um SLO baseado em monitoramento permitiria a criação de um monitor para monitorar o desempenho em cada região. Os dados seriam então resumidos como uma meta, permitindo que o desempenho fosse rastreado globalmente.
+
+Alguns exemplos adicionais incluem:
+
+Alertas de tempo de inatividade: monitorar a porcentagem de tempo que um serviço fica online sem disparar alertas de tempo de inatividade
+Limites de erro: rastreando a frequência com que os limites de erro são excedidos em uma janela específica
+Captura de tela de um SLO baseado em monitor no Datadog
+Captura de tela de um SLO baseado em monitor no Datadog
+
+Esse tipo de SLO exige mais planejamento do que os SLOs baseados em métricas, mas pode fornecer insights mais detalhados, pois não rastreia apenas um único ponto de dados.
+
+SLOs de fatias de tempo
+Os SLOs de fatias de tempo concentram-se no monitoramento do desempenho do serviço em intervalos de tempo menores e consistentes. Os SLOs baseados em monitoramento e métricas calcularão a média do desempenho da métrica ou alarme e o compararão com a meta de SLO estabelecida. Os SLOs de fatias de tempo avaliam se o serviço atinge suas metas de desempenho em cada intervalo definido, como a cada cinco minutos ou uma hora. Os SLOs de fatias de tempo ajudam a garantir que o desempenho permaneça estável e identificam problemas de curto prazo que podem impactar a experiência do usuário.
+
+SLOs com fatias de tempo são ideais para monitorar confiabilidade consistente ao longo do tempo. Alguns exemplos incluem:
+
+Tempos de resposta: monitorar a porcentagem de tempo que um serviço fica online sem disparar alertas de inatividade
+Taxa de transferência: rastrear a porcentagem de tempo em que um serviço lida com solicitações suficientes a cada minuto para atender à demanda
+Captura de tela de um SLO de fatia de tempo no Datadog
+Captura de tela de um SLO de fatia de tempo no Datadog
+
+Esse tipo de SLO é especialmente útil para identificar problemas de desempenho de curto prazo, garantindo uma experiência consistente para os usuários. SLOs de intervalo de tempo fornecem insights granulares e ajudam as equipes a lidar com problemas que podem passar despercebidos em métricas mais amplas.

@@ -1,0 +1,24 @@
+O que torna um bom Indicador de Nível de Serviço?
+Ao definir um Objetivo de Nível de Serviço (SLO), uma das etapas mais importantes é selecionar um Indicador de Nível de Serviço (SLI). Um SLI bem escolhido prepara você para o sucesso, enquanto um abaixo do ideal pode gerar ruído e frustração desnecessários em sua organização. Reserve um momento para explorar as principais propriedades de um bom SLI e revisar alguns antipadrões a serem evitados.
+
+Felicidade do usuário
+Seus usuários estão satisfeitos? É uma pergunta simples com uma resposta nem tão simples assim. Ao escolher um bom SLI, lembre-se de que ele deve capturar a opinião dos usuários sobre o seu aplicativo. Imagine que você é um SRE de uma startup de IA que permite aos usuários alterar digitalmente fotos enviadas por eles, adicionando acessórios, como gravatas-borboleta, corações e até bigodes. O que seria um bom SLI para monitorar nesse cenário?
+
+Proxy para a satisfação do usuário: quanto mais bigodes os usuários adicionarem com sucesso às fotos, mais satisfeitos eles ficarão. Isso destaca um conceito importante: a satisfação do usuário depende de algo acontecendo ativamente — ou não — com o seu serviço. Se um bigode for inserido com sucesso, o SLI reflete essa mudança. Se nenhum bigode for inserido, o SLI permanece inalterado.
+
+Escala linear com a satisfação do usuário: Um bom SLI deve escalar linearmente com a satisfação do usuário. Por exemplo, imagine que seu aplicativo sofre um pico de latência, atrasando o posicionamento dos bigodes para seus usuários. Isso pode ocorrer devido à sobrecarga do aplicativo, problemas de rede ou outras causas. Seja qual for o motivo, seu SLI deve refletir esse impacto.
+
+Pense no seu SLI como uma escala móvel. Quando a latência atinge picos e a satisfação do usuário diminui, o SLI se aproxima da extremidade inferior. À medida que a latência cai e o sistema se recupera, o SLI deve retornar à faixa superior.
+
+Medido em uma escala de 0% a 100%: seu SLI deve ser mensurável em uma escala de 0% a 100%. Uma pontuação de 100% significa que tudo o que o SLI rastreia está funcionando corretamente e que os bigodes estão sendo colocados nas fotos conforme o esperado. Uma pontuação de 0% significa que o SLI mostra que o serviço está completamente offline e que nenhuma foto está sendo gerada.
+
+Usar um SLI que varia de 0% a 100% facilita a definição de um Acordo de Nível de Serviço (SLA), como atingir 99,99% de tempo de atividade do serviço gerador de imagens de IA.
+
+Antipadrões SLI
+Selecionar um SLI apropriado é extremamente importante para criar um SLI funcional. Existem alguns antipadrões comuns que devem ser evitados para garantir que seu SLO funcione conforme o esperado.
+
+Métricas irrelevantes: Qual a relevância da sua métrica proposta para a satisfação do usuário? À primeira vista, pode parecer que o uso de CPU ou memória seria um bom SLI. Se forem usados ​​em excesso, você não conseguirá editar fotos, certo? Bem, eles devem ser monitorados, mas não são realmente relevantes para a visão holística do seu aplicativo. No final das contas, o usuário não se importa com a porcentagem da sua CPU, ele só se importa em poder adicionar acessórios às suas fotos. É importante garantir que seu SLI abranja todo o desempenho do seu aplicativo, e não apenas uma parte.
+
+Excessivamente complexo: Se o SLI escolhido for muito complexo, será difícil para qualquer pessoa que o utilize entender ou agir de acordo com ele. Por exemplo, se a sua fórmula de SLI combinar a porcentagem de uso da CPU no seu frontend com a latência média das consultas ao banco de dados, será difícil extrair algo útil dela. Seu SLI deve ser claro e fácil de entender para qualquer pessoa que precise trabalhar com ele.
+
+Falta de capacidade de ação: Ao selecionar um SLI, é importante garantir que o resultado seja acionável. Por exemplo, se você escolher uma métrica que monitora quantos servidores estão no grupo de dimensionamento automático executando seu serviço de gerador de imagens de IA, não há muito o que fazer com essa informação. Esse tipo de métrica é mais adequado como um monitor, não como parte de um SLO. Certifique-se de que seu SLI forneça um caminho claro e acionável a ser seguido caso surja um problema e seja necessária uma ação.

@@ -1,0 +1,38 @@
+Distributed tracing
+In a distributed system, multiple services work together, each contributing to the total work required to process a request.
+
+Distributed tracing in APM shows the execution path of a single request as it moves through different services. Each trace is assigned a unique trace ID that lets you follow the request across services.
+
+For example, imagine sharing a photo on Instagram. This action might involve work done by several services: one to process the image, another to store it, and a third to notify followers.
+
+Distributed tracing captures the interactions between these services and shows how much time each step in the process takes. Each step involved in processing the request adds information to the trace. By looking at the full trace, you can see each unit of work required to complete the request, how much time it took, and whether any errors occurred.
+
+Visualizing a trace: flame graphs
+While metrics provide an overview of service performance, traces let you zoom in to follow the path of individual requests through your services. This level of detail shows how specific operations contribute to the metrics you’re monitoring.
+
+In Datadog, a trace is represented as a flame graph (shown below), which visualizes the execution path of a request across distributed services. Each operation in the request is displayed as a horizontal bar called a span.
+
+Flame graph showing two longer yellow spans from web-store followed by one short blue span from user-db and three short orange spans from web-store-mongo.
+Flame graph showing two longer yellow spans from web-store followed by one short blue span from user-db and three short orange spans from web-store-mongo.
+
+Spans represent the units of work in a request
+The order of spans reflects the sequence of operations.
+Spans stacked below others indicate that they are part of a larger operation.
+A trace can include any number of spans, depending on how many operations or services are involved in responding to the request.
+Each span records details about its operation, such as its duration, start and end time, and the service it belongs to.
+By analyzing span durations, you can quickly see where time is spent and which services are most critical to the request’s completion.
+
+Flame graphs illustrate how services work together
+Analyzing a flame graph helps you answer important questions about your application’s behavior:
+
+How much time was spent in each service?
+Which operations or services take the most time?
+How do services interact to fulfill a request?
+Flame graphs combine detailed timing data with the flow of operations, giving you the context needed to understand how your services work together to process requests.
+
+Metrics and traces reveal the details of a complex system
+Metrics capture system health by revealing trends and patterns, such as rising error rates or longer response times, that could negatively impact user experience. Traces complement metrics by adding detailed context, showing the path a request takes through your services and how those services interact.
+
+Knowing where time is spent and how services work together gives you a clearer understanding of your application’s behavior in a distributed system, helping you make sense of the complexity introduced by microservices.
+
+In the next activity, you’ll use metrics to identify high-level trends in an e-commerce application. You’ll also use traces to analyze individual requests and service dependencies more closely.
