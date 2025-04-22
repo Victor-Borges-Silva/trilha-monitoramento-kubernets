@@ -1,3 +1,5 @@
+![img](./images/agent_daemonset%20(1).png)
+
 # Configure Helm chart
 Helm is already installed in your lab environment. You can confirm this by running the following command:
 
