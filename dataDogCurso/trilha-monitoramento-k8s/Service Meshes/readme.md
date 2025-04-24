@@ -19,7 +19,8 @@ Isso permite **delegar funcionalidades como criptografia** diretamente ao servic
 O **control plane** (com projetos como **Istio** ou **Linkerd**) melhora a usabilidade dos proxies de rede criando uma **linguagem de configuração amigável** para definir o comportamento desses proxies.
 
 No Kubernetes, essa linguagem normalmente é implementada através de **Custom Resource Definitions (CRDs)**.
-![img](./img/05-02_dataplane.png)
+
+![img](./img/05-02_controlplane.png
 
 ---
 
@@ -37,7 +38,8 @@ Para implementar **Progressive Delivery** no Kubernetes com **Istio**, o primeir
 - `Istio VirtualService`
 
 Esses dois CRDs juntos funcionam como um equivalente ao objeto `Ingress` do Kubernetes, com funcionamento semelhante.
-![img](./img/05-03_dataplane.png)
+
+![img](./img/05-03_istioservices.png
 
 ---
 
@@ -45,7 +47,8 @@ Esses dois CRDs juntos funcionam como um equivalente ao objeto `Ingress` do Kube
 
 - O **Istio Gateway** define os diferentes **URLs de destino** para o tráfego externo.
 - O **VirtualService** mapeia esses **Gateways** para os **serviços internos** do cluster.
-![img](./img/05-04_dataplane.png)
+
+![img](./img/05-04_destinationrule.png
 
 ---
 
@@ -55,7 +58,7 @@ Para habilitar o Progressive Delivery, precisamos informar ao Istio que existem 
 
 Isso é feito através do recurso `DestinationRule`.
 
-![img](./img/05-05_dataplane.png)
+![img](./img/05-05_canaryistio.png)
 
 Exemplo: duas versões do serviço `discounts`:
 
