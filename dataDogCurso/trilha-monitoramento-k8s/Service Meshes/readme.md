@@ -20,7 +20,7 @@ O **control plane** (com projetos como **Istio** ou **Linkerd**) melhora a usabi
 
 No Kubernetes, essa linguagem normalmente é implementada através de **Custom Resource Definitions (CRDs)**.
 
-![img](./img/05-02_controlplane.png
+![img](./img/05-02_controlplane.png)
 
 ---
 
@@ -39,7 +39,7 @@ Para implementar **Progressive Delivery** no Kubernetes com **Istio**, o primeir
 
 Esses dois CRDs juntos funcionam como um equivalente ao objeto `Ingress` do Kubernetes, com funcionamento semelhante.
 
-![img](./img/05-03_istioservices.png
+![img](./img/05-03_istioservices.png)
 
 ---
 
@@ -48,7 +48,7 @@ Esses dois CRDs juntos funcionam como um equivalente ao objeto `Ingress` do Kube
 - O **Istio Gateway** define os diferentes **URLs de destino** para o tráfego externo.
 - O **VirtualService** mapeia esses **Gateways** para os **serviços internos** do cluster.
 
-![img](./img/05-04_destinationrule.png
+![img](./img/05-04_destinationrule.png)
 
 ---
 
